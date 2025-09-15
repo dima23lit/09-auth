@@ -6,8 +6,6 @@ import { useQuery, keepPreviousData  } from '@tanstack/react-query'
 import NoteList from "@/components/NoteList/NoteList"
 import { useState } from "react"
 import Pagination from "@/components/Pagination/Pagination"
-// import NoteForm from "@/components/NoteForm/NoteForm"
-// import Modal from "@/components/Modal/Modal"
 import SearchBox from "@/components/SearchBox/SearchBox"
 import { useDebouncedCallback } from 'use-debounce';
 import Link from "next/link"
@@ -19,10 +17,7 @@ type Props = {
 export default function NotesPage({ tag }: Props) {
 
     const [currentPage, setCurrentPage] = useState(1);
-    // const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    // const openModal = () => setIsModalOpen(true);
-    // const closeModal = () => setIsModalOpen(false);
 
     const debouncedSetSearchQuery = useDebouncedCallback((query: string) => {
         setSearchQuery(query);
