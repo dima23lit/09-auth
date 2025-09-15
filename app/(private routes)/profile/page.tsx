@@ -1,39 +1,45 @@
 import Link from "next/link";
 // import Image from 'next/image';
 import css from '@/app/(private routes)/profile/ProfilePage.module.css'
-import { Metadata } from "next";
+// import { Metadata } from "next";
+import { fetchUser } from "@/lib/api/serverApi";
 
-export const metadata: Metadata = {
-  title: "NoteHab",
-  description: "Welcome to NoteHab",
-  openGraph: {
-    title: "NoteHab",
-    description: "Welcome to NoteHab",
-    url: "https://08-zustand-aiv1.vercel.app/",
-    images: [
-      {
-        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Note Hub Logo",
-      },
-    ],
-  },
-};
+// export const metadata: Metadata = {
+//   title: "NoteHab",
+//   description: "Welcome to NoteHab",
+//   openGraph: {
+//     title: "NoteHab",
+//     description: "Welcome to NoteHab",
+//     url: "https://08-zustand-aiv1.vercel.app/",
+//     images: [
+//       {
+//         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+//         width: 1200,
+//         height: 630,
+//         alt: "Note Hub Logo",
+//       },
+//     ],
+//   },
+// };
 
-export default function Profile() {
+
+export default async function Profile() {
+
+    const data  = await fetchUser();
+    console.log('data', data);
+
     return (
         <main className={css.mainContent}>
             <div className={css.profileCard}>
                 <div className={css.header}>
                     <h1 className={css.formTitle}>Profile Page</h1>
-                    <Link href="/app/(private routes)/profile/edit" className={css.editProfileButton}>
+                    <Link href="/profile/edit" className={css.editProfileButton}>
                         Edit Profile
                     </Link>
                 </div>
                 <div className={css.avatarWrapper}>
                     {/* <Image
-                        src="Avatar"
+                        src={data.avatar}
                         alt="User Avatar"
                         width={120}
                         height={120}
@@ -42,10 +48,10 @@ export default function Profile() {
                 </div>
                 <div className={css.profileInfo}>
                     <p>
-                        Username: your_username
+                        Username: {data.username}
                     </p>
                     <p>
-                        Email: your_email@example.com
+                        Email: {data.email}
                     </p>
                 </div>
             </div>

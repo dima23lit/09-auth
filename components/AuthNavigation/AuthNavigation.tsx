@@ -1,8 +1,15 @@
+'use client'
+
 import css from '@/components/AuthNavigation/AuthNavigation.module.css'
+import { logout } from '@/lib/api/clientApi';
 import Link from "next/link";
 
 
 export default function AuthNavigation() {
+    const onLogout = async () => {
+        await logout();
+    } 
+
     return (
         <>
             <li className={css.navigationItem}>
@@ -12,7 +19,7 @@ export default function AuthNavigation() {
             </li>
             <li className={css.navigationItem}>
                 <p className={css.userEmail}>User email</p>
-                <button className={css.logoutButton}>
+                <button className={css.logoutButton} onClick={onLogout}>
                     Logout
                 </button>
             </li>

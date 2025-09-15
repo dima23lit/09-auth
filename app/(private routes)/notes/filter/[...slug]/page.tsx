@@ -1,4 +1,4 @@
-import { fetchNotes } from "@/lib/api/api"
+import { fetchNotes } from "@/lib/api/serverApi"
 import NotesPage from '@/app/(private routes)/notes/filter/[...slug]/Notes.client'
 import {
   dehydrate,
