@@ -1,5 +1,5 @@
-import { fetchNotes } from "@/lib/api"
-import NotesPage from '@/app/notes/filter/[...slug]/Notes.client'
+import { fetchNotes } from "@/lib/api/api"
+import NotesPage from '@/app/(private routes)/notes/filter/[...slug]/Notes.client'
 import {
   dehydrate,
   HydrationBoundary,

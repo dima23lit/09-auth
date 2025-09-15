@@ -1,4 +1,4 @@
-import css from '@/app/notes/filter/@sidebar/SidebarNotes.module.css'
+import css from '@/app/(private routes)/notes/filter/@sidebar/SidebarNotes.module.css'
 import Link from "next/link";
 
 const TAGS = ["All", "Todo", "Work", "Personal", "Meeting", "Shopping"];
