@@ -87,3 +87,13 @@ export async function fetchNoteById(id: string) {
     })
     return res.data
 }
+
+export const checkServerSession = async () => {
+    const cookieStore = await cookies();
+    const response = await api.get<{ success: boolean }>('auth/session', {
+        headers: {
+          Cookie: cookieStore.toString()
+      }
+    })
+    return response
+}

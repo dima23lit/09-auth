@@ -1,26 +1,26 @@
 import Link from "next/link";
-// import Image from 'next/image';
+import Image from 'next/image';
 import css from '@/app/(private routes)/profile/ProfilePage.module.css'
-// import { Metadata } from "next";
+import { Metadata } from "next";
 import { fetchUser } from "@/lib/api/serverApi";
 
-// export const metadata: Metadata = {
-//   title: "NoteHab",
-//   description: "Welcome to NoteHab",
-//   openGraph: {
-//     title: "NoteHab",
-//     description: "Welcome to NoteHab",
-//     url: "https://08-zustand-aiv1.vercel.app/",
-//     images: [
-//       {
-//         url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-//         width: 1200,
-//         height: 630,
-//         alt: "Note Hub Logo",
-//       },
-//     ],
-//   },
-// };
+export const metadata: Metadata = {
+  title: "NoteHab. Your Profile",
+  description: "Welcome to Personal Profile of NoteHab",
+  openGraph: {
+    title: "NoteHab. Your Profile",
+    description: "Welcome to Personal Profile of NoteHab",
+    url: "https://09-auth-eight-wine.vercel.app/",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Note Hub Logo",
+      },
+    ],
+  },
+};
 
 
 export default async function Profile() {
@@ -38,13 +38,13 @@ export default async function Profile() {
                     </Link>
                 </div>
                 <div className={css.avatarWrapper}>
-                    {/* <Image
-                        src={data.avatar}
+                    <Image
+                        src='https://ac.goit.global/fullstack/react/notehub-og-meta.jpg'
                         alt="User Avatar"
                         width={120}
                         height={120}
                         className={css.avatar}
-                    /> */}
+                    />
                 </div>
                 <div className={css.profileInfo}>
                     <p>

@@ -3,6 +3,7 @@ import { Credentials } from "./api";
 import { Note, NewNote } from '@/types/note'
 import { User } from '@/types/user'
 import NotesHttpResponse from "./api";
+import { isAxiosError } from "axios";
 
 export const register = async (creds: Credentials) => {
   const { data } = await api.post<User>('/auth/register', creds)
@@ -73,4 +74,30 @@ export async function fetchNoteById(id: string) {
         }
     })
     return res.data
+}
+
+export const checkServerSession = async () => {
+    const { data } = await api.get<{ success: boolean }>('/auth/session', {
+        withCredentials: true,
+    })
+    return data.success
+}
+
+export const fetchUser = async () => {
+    const { data } = await api.get<User>('/users/me')
+    return data
+}
+
+export async function updateUser(
+  update: Partial<{ username: string }>
+): Promise<User> {
+  try {
+    const { data: user } = await api.patch<User>("/users/me", update);
+    return user;
+  } catch (error) {
+    if (isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || "Update failed");
+    }
+    throw new Error("Update failed");
+  }
 }

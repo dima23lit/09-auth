@@ -3,15 +3,28 @@
 import css from '@/components/AuthNavigation/AuthNavigation.module.css'
 import { logout } from '@/lib/api/clientApi';
 import Link from "next/link";
+import { useAuthStore } from '@/lib/store/authStore';
+import { useRouter } from 'next/navigation';
 
 
 export default function AuthNavigation() {
-    const onLogout = async () => {
-        await logout();
-    } 
 
-    return (
-        <>
+    const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+    const clearIsAuthenticated = useAuthStore(state => state.clearIsAuthenticated);
+    const router = useRouter()
+
+    const onLogout = async () => {
+        try {
+            await logout();
+            clearIsAuthenticated()
+            router.replace('/sign-in')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    if (isAuthenticated) {
+        return (<>
             <li className={css.navigationItem}>
                 <Link href="/profile" prefetch={false} className={css.navigationLink}>
                     Profile
@@ -23,6 +36,11 @@ export default function AuthNavigation() {
                     Logout
                 </button>
             </li>
+        </>)
+    }
+
+    return (
+        <>
             <li className={css.navigationItem}>
                 <Link href="/sign-in" prefetch={false} className={css.navigationLink}>
                     Login

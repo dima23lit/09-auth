@@ -4,6 +4,8 @@ import css from '@/app/(auth routes)/sign-in/SignInPage.module.css'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { Credentials } from '@/lib/api/api'
 import { login } from '@/lib/api/clientApi'
+import { useAuthStore } from '@/lib/store/authStore'
+import { useRouter } from 'next/navigation'
 
 const initialValues: Credentials= {
     email: "",
@@ -11,14 +13,22 @@ const initialValues: Credentials= {
 }
 
 export default function Login() {
+
+    const setUser = useAuthStore(state => state.setUser)
+    const router = useRouter();
+
     const handleSubmit = async (
             values: Credentials,
             actons: FormikHelpers<Credentials>
-        ) => {
-            console.log('values:', values)
+    ) => {
+        try {
             const user = await login(values);
-            console.log('user', user);
             actons.resetForm()
+            setUser(user)
+            router.replace("/profile")
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     return (
